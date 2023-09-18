@@ -1,0 +1,6 @@
+# Carpeta de resultados de compilación
+bin/
+obj/
+
+# Carpeta de migraciones
+Migrations/

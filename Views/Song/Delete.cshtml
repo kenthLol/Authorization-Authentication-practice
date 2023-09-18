@@ -1,0 +1,36 @@
+@model practica4.Models.Song
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container mt-5">
+    <h1>Eliminar Música</h1>
+
+    <div class="alert alert-danger" role="alert">
+        <h3>Estás seguro que quieres borrar esta música?</h3>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Música</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">Track</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Title)</dd>
+                <dt class="col-sm-2">Duración</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Duration)</dd>
+                <dt class="col-sm-2">Album</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Album.Title)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="SongId" />
+        <div class="mt-3">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+        </div>
+    </form>
+</div>
+

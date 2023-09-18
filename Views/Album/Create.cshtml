@@ -1,0 +1,47 @@
+@model practica4.Models.Album
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container mt-5">
+    <h1>Crear Álbum</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Información del Álbum</h4>
+            <hr />
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label">Título</label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReleaseDate" class="control-label">Lanzamiento</label>
+                    <input asp-for="ReleaseDate" class="form-control" />
+                    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ArtistId" class="control-label">Artista</label>
+                    <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.ArtistId"></select>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Portrait" class="control-label">Portada</label>
+                    <input asp-for="Portrait" class="form-control" />
+                    <span asp-validation-for="Portrait" class="text-danger"></span>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <a asp-action="Index" class="btn btn-secondary ml-2">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

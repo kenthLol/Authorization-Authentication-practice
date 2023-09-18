@@ -1,0 +1,78 @@
+@model practica4.Models.Album
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="album-details">
+                <h4>Album</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-3">Titulo</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Title)</dd>
+                    <dt class="col-sm-3">Lanzamiento</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.ReleaseDate)</dd>
+                    <dt class="col-sm-3">Artista</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Artist.Name)</dd>
+                    <dd class="col-sm-12">
+                        <img src="@Model.Portrait" alt="Artista" class="img-thumbnail mt-1" style="max-width: 150px;" />
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="song-list">
+                <h4>Músicas</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Track</th>
+                            <th>Duración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var song in Model.Songs)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@Model.Portrait" alt="Album" class="img-thumbnail" style="max-width: 50px;" />
+                                </td>
+                                <td>@song.Title</td>
+                                <td>@song.Duration</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <a asp-action="Edit" asp-route-id="@Model?.AlbumId" class="btn btn-primary">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .album-details {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border: 1px solid #d6d8db;
+        border-radius: 5px;
+    }
+    
+    .song-list {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border: 1px solid #d6d8db;
+        border-radius: 5px;
+    }
+</style>
+

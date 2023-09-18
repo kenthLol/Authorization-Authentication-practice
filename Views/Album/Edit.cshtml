@@ -1,0 +1,61 @@
+@model practica4.Models.Album
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container mt-5">
+    <h1>Editar Album</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Album</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-8">
+                    <form asp-action="Edit" class="needs-validation" novalidate>
+                        <input type="hidden" asp-for="AlbumId" />
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label">Titulo</label>
+                            <input asp-for="Title" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Ingresa un título.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ReleaseDate" class="control-label">Lanzado</label>
+                            <input asp-for="ReleaseDate" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Ingresa la fecha de lanzamiento.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ArtistId" class="control-label">Artista</label>
+                            <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.ArtistId" required></select>
+                            <div class="invalid-feedback">
+                                Selecciona un artista.
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Portrait" class="control-label">Portada</label>
+                            <input asp-for="Portrait" class="form-control" />
+                            <span asp-validation-for="Portrait" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="@Model.Portrait" alt="Album" class="img-fluid" style="max-height: 400px;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

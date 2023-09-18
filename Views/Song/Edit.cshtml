@@ -1,0 +1,53 @@
+@model practica4.Models.Song
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container mt-5">
+    <h1>Editar Música</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Música</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-8">
+                    <form asp-action="Edit" class="needs-validation" novalidate>
+                        <input type="hidden" asp-for="SongId" />
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label">Track</label>
+                            <input asp-for="Title" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Ingrese un título.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Duration" class="control-label">Duración</label>
+                            <input asp-for="Duration" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Ingrese la duración.
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="AlbumId" class="control-label">Album</label>
+                            <select asp-for="AlbumId" class="form-control" asp-items="ViewBag.AlbumId" required></select>
+                            <div class="invalid-feedback">
+                                Selecciona un álbum.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

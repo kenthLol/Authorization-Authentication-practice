@@ -1,0 +1,90 @@
+@model IEnumerable<practica4.Models.Song>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .song-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .song-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #d6d8db;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .song-item img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .song-info {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .song-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .song-details {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .song-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .song-actions a {
+        text-decoration: none;
+        color: #007bff;
+        transition: color 0.2s;
+    }
+
+    .song-actions a:hover {
+        color: #0056b3;
+    }
+</style>
+
+<h1>Lista de música</h1>
+
+<p>
+    <a asp-action="Create">Ingresar nuevo</a>
+</p>
+<div class="song-list">
+    @foreach (var item in Model) {
+        <div class="song-item">
+            <img src="@item.Album.Portrait" alt="Album Cover">
+            <div class="song-info">
+                <div class="song-title">@Html.DisplayFor(modelItem => item.Title)</div>
+                <div class="song-details">
+                    <span>@Html.DisplayFor(modelItem => item.Album.Title)</span>
+                    <span>@Html.DisplayFor(modelItem => item.Duration)</span>
+                </div>
+            </div>
+            <div class="song-actions">
+                <a asp-action="Edit" asp-route-id="@item.SongId">Editar</a>
+                <a asp-action="Details" asp-route-id="@item.SongId">Detalles</a>
+                <a asp-action="Delete" asp-route-id="@item.SongId">Eliminar</a>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,36 @@
+@model practica4.Models.Artist
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container mt-5">
+    <h1>Eliminar</h1>
+
+    <div class="alert alert-danger" role="alert">
+        <h3>Estás seguro que quieres eliminar este artista?</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Información</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">Nombre</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Name)</dd>
+            </dl>
+            <div class="text-center mt-4">
+                <img src="@Model.Photo" alt="Artist" class="img-thumbnail" style="max-width: 200px;" />
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="Delete" class="mt-4">
+        <input type="hidden" asp-for="ArtistId" />
+        <div class="mt-3">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary ml-2">Regresar</a>
+        </div>
+    </form>
+</div>
+
