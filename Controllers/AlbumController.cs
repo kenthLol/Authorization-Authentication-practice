@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using practica4.Models;
 
 namespace practica4.Controllers
@@ -42,10 +43,17 @@ namespace practica4.Controllers
                 return NotFound();
             }
 
+            // Verifica si el usuario está autenticado
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Identity/Account/Login"); // Redirige a la página de inicio de sesión
+            }
+
             return View(album);
         }
 
         // GET: Album/Create
+        [Authorize(Roles = "ADMIN,CREADOR")]
         public IActionResult Create()
         {
             ViewData["ArtistId"] = new SelectList(_context.Artists, "ArtistId", "Name");
@@ -55,6 +63,7 @@ namespace practica4.Controllers
         // POST: Album/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN,CREADOR")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AlbumId,Title,ReleaseDate,ArtistId,Portrait")] Album album)
@@ -70,6 +79,7 @@ namespace practica4.Controllers
         }
 
         // GET: Album/Edit/5
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Albums == null)
@@ -89,6 +99,7 @@ namespace practica4.Controllers
         // POST: Album/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AlbumId,Title,ReleaseDate,ArtistId,Portrait")] Album album)
@@ -123,6 +134,7 @@ namespace practica4.Controllers
         }
 
         // GET: Album/Delete/5
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Albums == null)
@@ -142,6 +154,7 @@ namespace practica4.Controllers
         }
 
         // POST: Album/Delete/5
+        [Authorize(Roles = "ADMIN")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
